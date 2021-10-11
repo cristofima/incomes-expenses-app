@@ -2,29 +2,29 @@
   <div class="col-12">
     <div class="card">
       <div class="card-body">
-        <h4 class="card-title">Detalle de ingreso egreso</h4>
-
+        <h4 class="card-title">Income Expense details</h4>
         <table class="table">
           <thead>
             <tr>
-              <th>Descripción</th>
-              <th>Monto</th>
-              <th>Tipo</th>
+              <th>Description</th>
+              <th>Amount</th>
+              <th>Type</th>
               <th></th>
             </tr>
           </thead>
-
           <tbody>
-            <tr>
-              <td>Descripción</td>
-              <td>Monto</td>
-              <td>Tipo</td>
-              <td>acciones</td>
+            <tr *ngFor="let item of list">
+              <td>{{item.description}}</td>
+              <td>{{item.amount | currency}}</td>
+              <td [ngClass]="{'text-success': item.type == 'income', 'text-danger': item.type == 'expense'}">
+                {{item.type}}</td>
+              <td>
+                <button *ngIf="item.uid" type="button" (click)="remove(item.uid)" title="Delete"
+                  class="btn btn-danger"><i class="fa fa-trash"></i></button>
+              </td>
             </tr>
           </tbody>
-
         </table>
-
       </div>
     </div>
   </div>
