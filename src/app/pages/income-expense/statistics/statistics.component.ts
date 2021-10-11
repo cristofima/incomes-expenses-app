@@ -1,9 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
-import { AppState } from 'src/app/app.reducer';
 import { IncomeExpense } from 'src/app/models/income-expense.model';
 import { MultiDataSet, Label } from 'ng2-charts';
+import { AppStateWithIncome } from '../income-expense.reducer';
 
 @Component({
   selector: 'app-statistics',
@@ -21,7 +21,7 @@ export class StatisticsComponent implements OnInit, OnDestroy {
 
   private incomesExpensesSubscription!: Subscription;
 
-  constructor(private store: Store<AppState>) { }
+  constructor(private store: Store<AppStateWithIncome>) { }
 
   ngOnInit(): void {
     this.incomesExpensesSubscription = this.store.select('incomesExpenses').subscribe(({items}) => {
